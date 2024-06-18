@@ -19,6 +19,7 @@ def train_model(features: pd.DataFrame, model_registry_folder: str) -> None:
     target = 'Ba_avg'
     X = features.drop(columns=[target])
     y = features[target]
+    mlflow.set_tracking_uri(http://0.0.0.0:46873)
     with mlflow.start_run():
         mlflow.sklearn.autolog()
         model = RandomForestRegressor(n_estimators=1, max_depth=10, n_jobs=1)
