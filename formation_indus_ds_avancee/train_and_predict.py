@@ -22,9 +22,9 @@ def train_model(features: pd.DataFrame, model_registry_folder: str) -> None:
     mlflow.set_tracking_uri('http://0.0.0.0:46873')
     with mlflow.start_run():
         mlflow.sklearn.autolog()
-        mlflow.sklearn.log_model
         model = RandomForestRegressor(n_estimators=1, max_depth=10, n_jobs=1)
         model.fit(X, y)
+        mlflow.sklearn.log_model
     time_str = time.strftime('%Y%m%d-%H%M%S')
     joblib.dump(model, os.path.join(model_registry_folder, time_str + '.joblib'))
 
