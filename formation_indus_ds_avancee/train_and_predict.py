@@ -6,6 +6,8 @@ import mlflow
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
+import mlflow
+
 
 def train_model_with_io(features_path: str, model_registry_folder: str) -> None:
     features = pd.read_parquet(features_path)
@@ -18,7 +20,7 @@ def train_model(features: pd.DataFrame, model_registry_folder: str) -> None:
     X = features.drop(columns=[target])
     y = features[target]
     with mlflow.start_run():
-        # insert autolog here ...
+        mlflow.sklearn.autolog()
         model = RandomForestRegressor(n_estimators=1, max_depth=10, n_jobs=1)
         model.fit(X, y)
     time_str = time.strftime('%Y%m%d-%H%M%S')
